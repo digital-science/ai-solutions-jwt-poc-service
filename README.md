@@ -21,7 +21,7 @@ The verification of a JWT token with Digital Science's Developer Portal involves
 
 - build image: docker build -t jwt-token-poc-app .
 - run it: docker run -p 3000:3000 jwt-token-poc-app
-- make a request: curl localhost:3000 -H "Authorization: Bearer \<JWT_TOKEN\>" -H "X-service-id: \<service_id\>"
+- make a request: curl localhost:3000 -H "Authorization: Bearer \<JWT_TOKEN\>" -H "X-service-id: \<service_id\>", where JWT_TOKEN - generated token, service_id - id of your service on developer portal (check it on /public-keys page)
 - output example:
 
 {
