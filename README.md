@@ -16,3 +16,15 @@ The verification of a JWT token with Digital Science's Developer Portal involves
 - Public Key Identification: Extract the public key ID from the payload
 - Verification Request: Send a request to the Developer Portal's verification endpoint
 - Response Handling: Process the verification response and determine token validity
+
+### How to use
+
+- build image: docker build -t jwt-token-poc-app .
+- run it: docker run -p 3000:3000 jwt-token-poc-app
+- make a request: curl localhost:3000 -H "Authorization: Bearer \<JWT_TOKEN\>" -H "X-service-id: \<service_id\>"
+- output example:
+
+{
+  "request_public_key_body": "\<public key body\>",
+  "request_service_has_access": true/false
+}
