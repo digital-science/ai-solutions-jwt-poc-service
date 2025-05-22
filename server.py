@@ -70,14 +70,14 @@ def catch_all(path):
     logger.info("headers from dev portal:")
     for key, value in devportal_response.headers.items():
         response_headers[f"request_{key}"] = value
-        logger.info("     {key} = {value}")
+        logger.info(f"     {key} = {value}")
 
     response_json = {}
     logger.info("devportal_response.json()", devportal_response.json())
     logger.info("JSON values from dev portal:")
     for key, value in devportal_response.json().items():
         response_json[f"request_{key}"] = value
-        logger.info("     {key} = {value}")
+        logger.info(f"     {key} = {value}")
 
     response = make_response(jsonify(response_json))
     response.headers.update(response_headers)
