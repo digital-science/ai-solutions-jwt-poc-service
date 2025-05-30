@@ -45,7 +45,7 @@ sequenceDiagram
 
 - build image: docker build -t jwt-token-poc-app .
 - run it: docker run -p 3000:3000 jwt-token-poc-app
-- make a request: curl localhost:3000 -H "Authorization: Bearer \<JWT_TOKEN\>" -H "X-service-id: \<service_id\>", where JWT_TOKEN - generated token, service_id - id of your service on developer portal (check it on /public-keys page)
+- make a request: curl localhost:3000//user-endpoint -H "Authorization: Bearer \<JWT_TOKEN\>" -H "X-service-id: \<service_id\>", where JWT_TOKEN - generated token, service_id - id of your service on developer portal (check it on /public-keys page)
 - output example:
 
 {
