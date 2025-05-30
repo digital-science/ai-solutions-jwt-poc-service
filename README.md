@@ -17,6 +17,30 @@ The verification of a JWT token with Digital Science's Developer Portal involves
 - Verification Request: Send a request to the Developer Portal's verification endpoint
 - Response Handling: Process the verification response and determine token validity
 
+### How it works
+
+```plantuml
+@startuml
+sequenceDiagram
+        actor User
+        participant Service
+        participant APG as API Gateway
+        participant DevPortal as Develper Portal
+        User->>Service: request /user
+        Service->>Service: Generate a token
+        Service->>APG: Send a request <API Gateway URL>/service_name with "Authorization: Bearer <TOKEN>"
+        APG->>APG: Validate token
+        APG->>Service: Forward request
+        Service->>Cache: Check for public key
+        Service->>DevPortal: get public key (/verify endpoint)
+        Service->>Cache: Cache public key
+        DevPortal->>Service: send back public key
+        Service->>Service: validate token
+        Service->>User: Return response
+@enduml
+
+```
+
 ### How to use
 
 - build image: docker build -t jwt-token-poc-app .
