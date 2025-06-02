@@ -16,6 +16,7 @@ app = Flask(__name__)
 # Get the external service ID and dev portal URL from environment variables
 external_service_id = os.environ.get('EXTERNAL_SERVICE_ID')
 dev_portal_url = os.environ.get('DEV_PORTAL_URL')
+gateway_url = os.environ.get('GATEWAY_URL')
 
 
 @app.route('/forwarded-request-endpoint')
@@ -82,7 +83,7 @@ def user_endpoint():
         logger.error(f"Error signing token: {e}")
         return jsonify({"error": f"Failed to sign token: {e}"}), 500
 
-    request = requests.get(f"{os.environ.get('DEV_PORTAL_URL')}/{external_service_id}",
+    request = requests.get(f"{os.environ.get('GATEWAY_URL')}/{external_service_id}",
                            headers={"Authorization": f"Bearer {token}"}
                            )
     request.raise_for_status()
@@ -130,5 +131,7 @@ if __name__ == '__main__':
         logger.error("DEV_PORTAL_URL environment variable is not set.")
     if not os.environ.get('EXTERNAL_SERVICE_ID'):
         logger.error("EXTERNAL_SERVICE_ID environment variable is not set.")
+    if not os.environ.get('GATEWAY_URL'):
+        logger.error("GATEWAY_URL environment variable is not set.")
 
     app.run(host='0.0.0.0', port=port, debug=True)
