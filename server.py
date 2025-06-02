@@ -86,6 +86,11 @@ def user_endpoint():
                            headers={"Authorization": f"Bearer {token}"}
                            )
     request.raise_for_status()
+
+    logger.info("request: headers: ", request.headers)
+
+    logger.info("request: json: ", request.json())
+
     public_key_body = request.json()["public_key_body"]
 
     try:
